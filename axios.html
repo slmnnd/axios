@@ -13,11 +13,12 @@
     <button onclick="deleteTodos()">delete todos</button>
     <button onclick="createTodos()">create todos</button>
     <button onclick="authLogin()">Auth Login</button>
+    <button onclick="token()">token</button>
 
     <script>
 
         const reusable = axios.create({
-            baseURL : "https://dummyjson.com"
+            baseURL : "https://dummyjson.com"            
         });   
         
         //get
@@ -108,8 +109,6 @@
             password : "addisonwpass",
             };
 
-            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsInVzZXJuYW1lIjoiYWRkaXNvbnciLCJlbWFpbCI6ImFkZGlzb24ud3JpZ2h0QHguZHVtbXlqc29uLmNvbSIsImZpcnN0TmFtZSI6IkFkZGlzb24iLCJsYXN0TmFtZSI6IldyaWdodCIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9kdW1teWpzb24uY29tL2ljb24vYWRkaXNvbncvMTI4IiwiaWF0IjoxNzE2NzM4NDc2LCJleHAiOjE3MTY3NDIwNzZ9.c71wNq8Jkpkl6GmN-MfvHUSYGFKDb9XJBhF36-d1umc';
-
             reusable
         .post(`/auth/login`, userLogin)
         .then(({data}) => {
@@ -122,6 +121,26 @@
         console.log('selesai.');
         })
 
+        }
+
+        //token
+        function token (){
+            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsInVzZXJuYW1lIjoiYWRkaXNvbnciLCJlbWFpbCI6ImFkZGlzb24ud3JpZ2h0QHguZHVtbXlqc29uLmNvbSIsImZpcnN0TmFtZSI6IkFkZGlzb24iLCJsYXN0TmFtZSI6IldyaWdodCIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9kdW1teWpzb24uY29tL2ljb24vYWRkaXNvbncvMTI4IiwiaWF0IjoxNzE2NzM4NDc2LCJleHAiOjE3MTY3NDIwNzZ9.c71wNq8Jkpkl6GmN-MfvHUSYGFKDb9XJBhF36-d1umc';
+
+            // Headers : {
+            //     'Authorization' = 'Bearer ' + {token} ;
+            // } 
+            reusable
+        .get(`/auth/me`)
+        .then(({data}) => {
+            console.log('berhasil Login!', data);
+        })
+        .catch((err) => { 
+            console.log('error heh ', err);
+        })
+        .finally (() => {
+        console.log('selesai.');
+        });
         }
         
         
